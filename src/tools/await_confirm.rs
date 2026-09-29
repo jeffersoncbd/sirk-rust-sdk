@@ -5,7 +5,7 @@ use std::{
     io::{BufRead, BufReader, Write},
 };
 
-impl Tools {
+impl Tools<'_> {
     pub fn await_confirm(&self) -> Result<(), Error> {
         let terminal = OpenOptions::new()
             .read(true)

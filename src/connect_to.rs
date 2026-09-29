@@ -1,4 +1,4 @@
-use crate::{Error, Sirk, http::HttpTransport};
+use crate::{Error, Sirk, http::HttpTransport, transport::Transport};
 use std::path::Path;
 
 impl Sirk {
@@ -14,9 +14,11 @@ impl Sirk {
         }
         let transport = HttpTransport::new(endpoint.to_owned());
         transport.health()?;
+        let directory = directory.as_ref().to_owned();
+        let flow_id = transport.create_flow(&directory)?;
         Ok(Self {
-            directory: directory.as_ref().to_owned(),
-            local_directory: std::env::current_dir().map_err(Error::CurrentDirectory)?,
+            directory,
+            flow_id,
             transport: Box::new(transport),
         })
     }

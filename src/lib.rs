@@ -10,7 +10,7 @@ mod transport;
 
 pub use error::Error;
 pub use sirk::Sirk;
-pub use tools::{Git, Tools};
+pub use tools::Tools;
 
 #[cfg(test)]
 mod tests;
