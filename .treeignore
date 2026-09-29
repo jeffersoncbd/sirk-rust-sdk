@@ -1,0 +1,11 @@
+/.agents/
+/.githooks/
+/docs/
+/flows/
+
+/*.md
+
+.gitignore
+.readignore
+.treeignore
+Cargo.lock

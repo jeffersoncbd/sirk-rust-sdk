@@ -41,3 +41,15 @@ the flow created automatically for the same directory.
 `tools().await_confirm()` remains a host-side interaction tool and waits for
 Enter (or `/cancel`) on the terminal. Workflow control remains the
 responsibility of the host program.
+
+## Git hook
+
+Activate the repository hook after cloning:
+
+```bash
+git config --local core.hooksPath .githooks
+```
+
+Before each commit, the hook runs `cargo run --bin documentation`. The flow
+updates `docs/`, asks for confirmation, and stages its changes so they are
+included in the commit.
