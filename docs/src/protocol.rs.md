@@ -1,9 +1,9 @@
 ## Summary
-The file defines request and response data structures for serializing and deserializing protocol messages.
+The file defines protocol request and response types for JSON messages.
 
 ## Behavior
-Request structs borrow directory, agent, and input data; response structs hold optional result, error, flow ID, paths, or status fields. The health response requires a status value.
+Requests serialize directory, agent, and input data, omitting `conversationId` when absent. Responses deserialize optional agent, flow, path, and status fields; health responses require a status.
 
 ## Imports
-- `serde`: Provides serialization and deserialization derives and field renaming.
+- `serde`: Provides serialization and deserialization derives and attributes.
 - `std::path::Path`: Represents directory paths in requests.

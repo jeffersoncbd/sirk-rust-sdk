@@ -42,6 +42,12 @@ the flow created automatically for the same directory.
 Enter (or `/cancel`) on the terminal. Workflow control remains the
 responsibility of the host program.
 
+When an agent requests input, `Sirk::agent` prints its question to the
+terminal, reads one answer, and sends that answer to the same agent in the
+current flow with the `conversationId` returned by S.I.R.K. The initial agent
+request omits that identifier; the SDK keeps it only until the agent returns a
+final result. Entering `/cancel` aborts the agent call.
+
 ## Git hook
 
 Activate the repository hook after cloning:

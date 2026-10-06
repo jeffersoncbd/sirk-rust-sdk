@@ -13,3 +13,14 @@ to the task at hand.
   command output, and generated files. Do not create, retain, or copy
   project content in another language; translate user-supplied text before
   placing it in a project artifact.
+
+## Documentation and handoff
+
+Keep README limited to setup, everyday commands, and a short usage overview.
+Never modify files under `docs/`, even when behavior, contracts, file
+responsibilities, or inventory change. Report any resulting documentation gap
+in the handoff. Do not duplicate the architecture map here or load all module
+docs by default.
+
+Report changes, relevant checks, and limitations. Avoid stale container IDs,
+fixed test counts, or historical success claims as ongoing guarantees.

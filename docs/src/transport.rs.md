@@ -1,8 +1,8 @@
 ## Summary
-Defines the interface for transport operations on a working directory and flow.
+Defines the interface for transport operations on a directory and flow.
 
 ## Behavior
-The `Transport` trait requires implementations to create flows, run agents, retrieve a directory tree and Git status, and stage changes. Each method returns its result or an `Error`; the trait is `Send + Sync`.
+Implementations create flows, run agents, retrieve directory trees and Git status, and stage changes; operations return results or `Error`.
 
 ## Imports
 - `crate::Error`: Error type returned by transport operations.

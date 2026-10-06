@@ -1,8 +1,10 @@
 ## Summary
-Runs the named agent with the supplied input and returns its output.
+Runs an agent, answering interactive questions until it returns a result.
 
 ## Behavior
-Passes the directory, flow ID, agent name, and input to the transport; returns its `Result<String, Error>` unchanged.
+Sends the directory, flow ID, agent name, and current input to the transport. For each question, prompts on the terminal and uses the answer for the next request; returns the final result or propagates an error.
 
 ## Imports
-- `crate::{Error, Sirk}`: Defines the error type and `Sirk` implementation target.
+- `crate::{Error, Sirk, AgentRunResponse}`: Provides the method types and response variants.
+- `std::fs::OpenOptions`: Opens the interactive terminal.
+- `std::io::{BufRead, BufReader, Write}`: Reads answers and writes prompts.
