@@ -1,6 +1,6 @@
 [package]
 name = "sirk-sdk"
-version = "0.3.0"
+version = "0.3.1"
 edition = "2024"
 description = "Standalone Rust SDK for the S.I.R.K. HTTP service"
 

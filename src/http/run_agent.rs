@@ -110,14 +110,16 @@ impl Transport for HttpTransport {
 }
 
 fn agent_run_response(response: AgentResponse) -> Result<AgentRunResponse, Error> {
-    let conversation_id = response.conversation_id.ok_or_else(|| {
-        Error::Protocol("agent response did not contain a conversationId".to_owned())
-    })?;
     match (response.ask, response.result) {
-        (Some(question), None) => Ok(AgentRunResponse::Ask {
-            question,
-            conversation_id,
-        }),
+        (Some(question), None) => response
+            .conversation_id
+            .map(|conversation_id| AgentRunResponse::Ask {
+                question,
+                conversation_id,
+            })
+            .ok_or_else(|| {
+                Error::Protocol("agent question did not contain a conversationId".to_owned())
+            }),
         (None, Some(result)) => Ok(AgentRunResponse::Result(result)),
         _ => Err(Error::Protocol(
             "agent response must contain exactly one of ask or result".to_owned(),
@@ -190,7 +192,7 @@ mod tests {
     }
 
     #[test]
-    fn rejects_an_agent_response_without_a_conversation_id() {
+    fn rejects_an_agent_question_without_a_conversation_id() {
         let error = agent_run_response(AgentResponse {
             ask: Some("What is your name?".to_owned()),
             conversation_id: None,
@@ -201,7 +203,20 @@ mod tests {
 
         assert_eq!(
             error.to_string(),
-            "S.I.R.K. protocol error: agent response did not contain a conversationId"
+            "S.I.R.K. protocol error: agent question did not contain a conversationId"
         );
+    }
+
+    #[test]
+    fn accepts_a_final_result_without_a_conversation_id() {
+        let response = agent_run_response(AgentResponse {
+            ask: None,
+            conversation_id: None,
+            result: Some("Documented".to_owned()),
+            error: None,
+        })
+        .unwrap();
+
+        assert!(matches!(response, AgentRunResponse::Result(result) if result == "Documented"));
     }
 }

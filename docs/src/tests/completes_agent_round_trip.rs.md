@@ -1,8 +1,8 @@
 ## Summary
-Tests that a Sirk client completes an agent run and subsequent tool requests against a mock HTTP server.
+Tests that a Sirk client runs an agent and completes follow-up tree and Git requests through a mock HTTP server.
 
 ## Behavior
-The mock server checks request paths, payloads, and flow IDs, then returns JSON responses. The test verifies the agent result, tree and Git status, sends a Git add request, and joins the server thread; failures panic through `unwrap` or assertions.
+The mock server validates request paths, project directory, flow ID, and agent input, then returns JSON responses. The test checks the agent result, tree and Git status, sends a Git add request, and joins the server thread; failures panic through `unwrap` or assertions.
 
 ## Imports
 - `crate::Sirk`: Connects to the server and makes client requests.

@@ -13,10 +13,7 @@ fn completes_agent_round_trip() {
         for (expected_path, response_body) in [
             ("/health", r#"{"status":"ok"}"#),
             ("/v1/flows", r#"{"flowId":"flow-18f-1234-0"}"#),
-            (
-                "/v1/agent/run",
-                r#"{"conversationId":"conversation-18f-1234-0","result":"documented"}"#,
-            ),
+            ("/v1/agent/run", r#"{"result":"documented"}"#),
             ("/v1/tree", r#"{"paths":["README.md","src/lib.rs"]}"#),
             ("/v1/git/status", r#"{"paths":["src/lib.rs"]}"#),
             ("/v1/git/add", r#"{"status":"ok"}"#),
